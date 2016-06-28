@@ -11,6 +11,26 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".TestCoordinatorLayout"
+            android:label="@string/title_activity_test_coordinator_layout" />
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:label="@string/title_activity_recycler_view" />
+        <activity
+            android:name=".NavigationViewActivity"
+            android:label="@string/title_activity_navigation_view" />
+        <activity
+            android:name=".UIPerformanceActivity"
+            android:label="@string/title_activity_uiperformance" >
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -18,25 +38,34 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".TestCoordinatorLayout"
-            android:label="@string/title_activity_test_coordinator_layout" >
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".RecyclerViewActivity"
-            android:label="@string/title_activity_recycler_view" >
+            android:name=".PhotoViewActivity"
+            android:label="@string/title_activity_photo_view" >
         </activity>
         <activity
-            android:name=".NavigationViewActivity"
-            android:label="@string/title_activity_navigation_view" >
+            android:name=".CircleFloatingBtnActivity"
+            android:label="@string/title_activity_circle_floating_btn" >
         </activity>
         <activity
-            android:name=".UIPerformanceActivity"
-            android:label="@string/title_activity_uiperformance" >
+            android:name=".TransitionActivityA"
+            android:label="@string/title_activity_transition" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".TransitionActivityB"
+            android:label="@string/title_activity_transition_activity_b" >
         </activity>
     </application>
 

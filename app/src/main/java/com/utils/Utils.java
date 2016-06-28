@@ -27,4 +27,13 @@ public class Utils {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, context.getResources().getDisplayMetrics());
 
     }
+
+    /**
+     * 将sp单位转为px单位
+     */
+    public static int sp2px(Context context, float spValue) {
+
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, context.getResources().getDisplayMetrics());
+
+    }
 }

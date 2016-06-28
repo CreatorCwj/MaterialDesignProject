@@ -7,4 +7,9 @@
     <string name="title_activity_recycler_view">RecyclerViewActivity</string>
     <string name="title_activity_navigation_view">NavigationViewActivity</string>
     <string name="title_activity_uiperformance">UIPerformanceActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_photo_view">PhotoViewActivity</string>
+    <string name="title_activity_circle_floating_btn">CircleFloatingBtnActivity</string>
+    <string name="title_activity_transition">TransitionActivityA</string>
+    <string name="title_activity_transition_activity_b">TransitionActivityB</string>
 </resources>
