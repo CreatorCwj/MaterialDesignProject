@@ -11,11 +11,11 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".TestCoordinatorLayout"
@@ -28,6 +28,15 @@
         <activity
             android:name=".NavigationViewActivity"
             android:label="@string/title_activity_navigation_view" >
+        </activity>
+        <activity
+            android:name=".UIPerformanceActivity"
+            android:label="@string/title_activity_uiperformance" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

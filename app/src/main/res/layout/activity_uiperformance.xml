@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn0" />
+
+    <ViewStub
+        android:id="@+id/viewStub"
+        android:inflatedId="@+id/stub_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/stub_item" />
+
+    <include
+        android:id="@+id/include_item1"
+        layout="@layout/include_item" />
+
+    <include
+        android:id="@+id/include_item2"
+        layout="@layout/include_item" />
+
+</LinearLayout>
