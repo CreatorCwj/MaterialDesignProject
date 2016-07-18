@@ -12,4 +12,5 @@
     <string name="title_activity_circle_floating_btn">CircleFloatingBtnActivity</string>
     <string name="title_activity_transition">TransitionActivityA</string>
     <string name="title_activity_transition_activity_b">TransitionActivityB</string>
+    <string name="title_activity_focus">FocusActivity</string>
 </resources>
