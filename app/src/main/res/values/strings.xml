@@ -13,4 +13,5 @@
     <string name="title_activity_transition">TransitionActivityA</string>
     <string name="title_activity_transition_activity_b">TransitionActivityB</string>
     <string name="title_activity_focus">FocusActivity</string>
+    <string name="title_activity_test_list">TestListActivity</string>
 </resources>
