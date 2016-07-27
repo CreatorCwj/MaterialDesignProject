@@ -25,4 +25,9 @@ public interface HeaderController {
      * 释放刷新处理方法
      */
     void onReleaseToRefreshState();
+
+    /**
+     * 下拉比例处理方法
+     */
+    void onScalePull(float scale);
 }

@@ -1,4 +1,4 @@
-package com.widget.refreshloadview;
+package com.refreshloadview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import com.materialdesign.R;
 
+
 /**
  * Created by cwj on 16/7/22.
  * Footer
+ * 1.可以配置不同状态的显示文字以及footer的背景色
  */
-public class FooterLayout extends FrameLayout implements FooterController {
+public class FooterLayout extends FrameLayout implements IFooter {
 
     protected TextView textView;
     protected ProgressBar progressBar;
@@ -64,36 +66,33 @@ public class FooterLayout extends FrameLayout implements FooterController {
     private void setAttrs() {
         setBackgroundColor(backColor);
         textView.setTextColor(textColor);
+        if (TextUtils.isEmpty(resetText)) {
+            resetText = getContext().getResources().getString(R.string.footer_reset_text);
+        }
+        if (TextUtils.isEmpty(loadingText)) {
+            loadingText = getContext().getResources().getString(R.string.footer_loading_text);
+        }
+        if (TextUtils.isEmpty(noMoreText)) {
+            noMoreText = getContext().getResources().getString(R.string.footer_no_more_text);
+        }
     }
 
     @Override
     public void onResetState() {
         progressBar.setVisibility(GONE);
-        if (!TextUtils.isEmpty(resetText)) {
-            textView.setText(resetText);
-        } else {
-            textView.setText("加载更多");
-        }
+        textView.setText(resetText);
     }
 
     @Override
     public void onLoadingState() {
         progressBar.setVisibility(VISIBLE);
-        if (!TextUtils.isEmpty(loadingText)) {
-            textView.setText(loadingText);
-        } else {
-            textView.setText("正在加载...");
-        }
+        textView.setText(loadingText);
     }
 
     @Override
     public void onLoadStop() {
         progressBar.setVisibility(GONE);
-        if (!TextUtils.isEmpty(noMoreText)) {
-            textView.setText(noMoreText);
-        } else {
-            textView.setText("无更多数据");
-        }
+        textView.setText(noMoreText);
     }
 
 }

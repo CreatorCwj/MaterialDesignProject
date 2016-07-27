@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/refreshBtn"
+        android:layout_width="match_parent"
+        android:text="refresh"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/loadBtn"
+        android:text="load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.refreshloadview.RefreshLoadScrollView
+        android:id="@+id/rlScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:autoRefresh="true"
+        app:canLoadMore="true"
+        app:contentView="@layout/content_view"
+        app:emptyView="@layout/empty_view"
+        app:firstPageNo="0"
+        app:pageSize="15" />
+</LinearLayout>

@@ -75,6 +75,17 @@
             android:name=".FocusActivity"
             android:label="@string/title_activity_focus"
             android:windowSoftInputMode="adjustResize|stateHidden" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".TestListActivity"
+            android:label="@string/title_activity_test_list" >
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -82,8 +93,19 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".TestListActivity"
-            android:label="@string/title_activity_test_list" >
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".TestScrollActivity"
+            android:label="@string/title_activity_test_scroll" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

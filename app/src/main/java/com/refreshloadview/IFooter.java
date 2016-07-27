@@ -1,10 +1,10 @@
-package com.widget.refreshloadview;
+package com.refreshloadview;
 
 /**
  * Created by cwj on 16/7/21.
  * Footer的统一接口
  */
-public interface FooterController {
+public interface IFooter {
 
     /**
      * 空闲时处理方法

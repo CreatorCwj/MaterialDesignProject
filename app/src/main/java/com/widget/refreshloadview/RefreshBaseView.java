@@ -61,7 +61,7 @@ public abstract class RefreshBaseView<T extends LoadBaseView> extends LinearLayo
         onLoadViewCreated(loadView);
         //添加header
         //todo 定制化
-        headerView = new HeaderLayout(context, attrs);
+//        headerView = new HeaderLayout(context, attrs);
         addView(headerView, 0, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
@@ -78,7 +78,7 @@ public abstract class RefreshBaseView<T extends LoadBaseView> extends LinearLayo
 
     private void updateViewSize() {
         int headerHeight = getMaxHeaderHeight();//header高度
-        headerView.setHeight(headerHeight);//设置header高度
+        headerView.setVisibleHeight(headerHeight);//设置header高度
         setPadding(getPaddingLeft(), -headerHeight, getPaddingRight(), getPaddingBottom());//设置初始位置
     }
 

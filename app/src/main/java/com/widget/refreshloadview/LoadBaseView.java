@@ -51,7 +51,7 @@ public abstract class LoadBaseView<T extends View> extends FrameLayout {
     private void initAttrs(Context context, AttributeSet attrs) {
         //初始化属性,交由子类处理,此类回收
         if (attrs != null) {
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RefreshBaseView);
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RefreshListView);
             handleAttrs(typedArray);
             typedArray.recycle();
         }
@@ -110,7 +110,7 @@ public abstract class LoadBaseView<T extends View> extends FrameLayout {
         //更新footer
         switch (loadState) {
             case IDLE:
-                footerView.onIdleState();
+                footerView.onResetState();
                 break;
             case LOADING:
                 footerView.onLoadingState();
