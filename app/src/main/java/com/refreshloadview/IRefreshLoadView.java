@@ -1,20 +1,10 @@
 package com.refreshloadview;
 
-import android.support.annotation.NonNull;
-import android.view.View;
-
 /**
  * Created by cwj on 16/7/28.
  * 刷新加载view共有方法接口
  */
 public interface IRefreshLoadView {
-
-    interface OnEmptyViewListener {
-
-        void onEmptyViewVisible(@NonNull View emptyView);
-
-        void onEmptyViewGone(@NonNull View emptyView);
-    }
 
     interface OnRefreshListener {
         void onRefresh();
@@ -23,11 +13,6 @@ public interface IRefreshLoadView {
     interface OnLoadListener {
         void onLoad();
     }
-
-    /**
-     * 设置空view监听器
-     */
-    void setOnEmptyViewListener(OnEmptyViewListener onEmptyViewListener);
 
     /**
      * 设置刷新监听

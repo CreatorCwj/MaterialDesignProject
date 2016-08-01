@@ -22,7 +22,7 @@ import java.util.List;
  * 1.可设置是否需要加载
  * 2.可配置背景色
  */
-public class LoadScrollView extends ScrollView {
+public class LoadScrollView extends ScrollView implements ILoadView {
 
     private static final int HANDLE_DELAY = 50;
 
@@ -61,10 +61,6 @@ public class LoadScrollView extends ScrollView {
         int FLING = 2;
 
         void onScrollStateChanged(int scrollState);
-    }
-
-    interface OnLoadListener {
-        void onLoad();
     }
 
     public LoadScrollView(Context context) {
@@ -141,6 +137,7 @@ public class LoadScrollView extends ScrollView {
     /**
      * 设置加载监听器
      */
+    @Override
     public void setOnLoadListener(OnLoadListener onLoadListener) {
         this.onLoadListener = onLoadListener;
     }
@@ -171,7 +168,8 @@ public class LoadScrollView extends ScrollView {
     /**
      * 无法继续加载
      */
-    void stopLoadMore() {
+    @Override
+    public void stopLoadMore() {
         if (canLoadMore) {
             loadComplete();//结束加载
             canLoadMore = false;//置为不可加载
@@ -182,7 +180,8 @@ public class LoadScrollView extends ScrollView {
     /**
      * 恢复可加载状态(初始设置可加载的话)
      */
-    void restoreLoadMore() {
+    @Override
+    public void restoreLoadMore() {
         if (originCanLoadMore && !canLoadMore) {//初始时可加载,当前不可加载(从不可加载变过来)
             canLoadMore = true;//置为可加载
             footerLayout.onResetState();
@@ -192,6 +191,7 @@ public class LoadScrollView extends ScrollView {
     /**
      * 是否处于加载状态
      */
+    @Override
     public boolean isLoading() {
         return isLoading;
     }
@@ -208,11 +208,17 @@ public class LoadScrollView extends ScrollView {
     /**
      * 加载完成
      */
-    void loadComplete() {
+    @Override
+    public void loadComplete() {
         if (isLoading()) {
             isLoading = false;
             footerLayout.onResetState();
         }
+    }
+
+    @Override
+    public void backToTop() {
+        scrollTo(0, 0);
     }
 
     private void startLoad() {

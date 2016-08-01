@@ -82,14 +82,14 @@ public class TestListActivity extends RoboActivity {
             }
         });
 
-        listView.getRefreshListView().setOnRefreshListener(new IRefreshLoadView.OnRefreshListener() {
+        listView.setOnRefreshListener(new IRefreshLoadView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 handler.sendEmptyMessageDelayed(0, 2000);
                 Utils.showToast(getApplicationContext(), "refresh pageNo: " + listView.getPageNo() + " pageSize: " + listView.getPageSize());
             }
         });
-        listView.getRefreshListView().setOnLoadListener(new IRefreshLoadView.OnLoadListener() {
+        listView.setOnLoadListener(new IRefreshLoadView.OnLoadListener() {
             @Override
             public void onLoad() {
                 handler.sendEmptyMessageDelayed(1, 2000);

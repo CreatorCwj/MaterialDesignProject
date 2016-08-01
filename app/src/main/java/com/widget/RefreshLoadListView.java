@@ -87,9 +87,7 @@ public class RefreshLoadListView extends ListView implements AbsListView.OnScrol
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RefreshLoadView);
             canRefresh = typedArray.getBoolean(R.styleable.RefreshLoadView_canRefresh, true);
             autoRefresh = typedArray.getBoolean(R.styleable.RefreshLoadView_autoRefresh, true);
-            canScrollWhenRefresh = typedArray.getBoolean(R.styleable.RefreshLoadView_canScrollWhenRefresh, true);
             canLoadMore = typedArray.getBoolean(R.styleable.RefreshLoadView_canLoadMore, true);
-            headerMode = HeaderLayout.HeaderStyle.getStyle(typedArray.getInt(R.styleable.RefreshLoadView_headerMode, HeaderLayout.HeaderStyle.CLASSIC.getId()));
             typedArray.recycle();
         }
     }

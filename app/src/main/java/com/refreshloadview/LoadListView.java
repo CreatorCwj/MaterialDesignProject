@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-
 import com.materialdesign.R;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import java.util.List;
  * 2.无数据不显示footer
  * 3.可配置背景色和divider样式
  */
-public class LoadListView extends ListView implements AbsListView.OnScrollListener {
+public class LoadListView extends ListView implements AbsListView.OnScrollListener, ILoadView {
 
     private FooterLayout footerLayout;
 
@@ -39,10 +38,6 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
     private OnScrollListener onScrollListener;
     private OnLoadListener onLoadListener;
     private List<OnDataChangeListener> onDataChangeListeners;
-
-    interface OnLoadListener {
-        void onLoad();
-    }
 
     public interface OnDataChangeListener {
         void onDataChange(ListAdapter adapter, int dataCount);
@@ -107,6 +102,7 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
     /**
      * 设置加载监听器
      */
+    @Override
     public void setOnLoadListener(OnLoadListener onLoadListener) {
         this.onLoadListener = onLoadListener;
     }
@@ -171,7 +167,8 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
     /**
      * 无法继续加载
      */
-    void stopLoadMore() {
+    @Override
+    public void stopLoadMore() {
         if (canLoadMore) {
             loadComplete();//结束加载
             canLoadMore = false;//置为不可加载
@@ -182,7 +179,8 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
     /**
      * 恢复可加载状态(初始设置可加载的话)
      */
-    void restoreLoadMore() {
+    @Override
+    public void restoreLoadMore() {
         if (originCanLoadMore && !canLoadMore) {//初始时可加载,当前不可加载(从不可加载变过来)
             canLoadMore = true;//置为可加载
             footerLayout.onResetState();
@@ -192,6 +190,7 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
     /**
      * 是否处于加载状态
      */
+    @Override
     public boolean isLoading() {
         return isLoading;
     }
@@ -222,11 +221,17 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
     /**
      * 加载完成
      */
-    void loadComplete() {
+    @Override
+    public void loadComplete() {
         if (isLoading()) {
             isLoading = false;
             footerLayout.onResetState();
         }
+    }
+
+    @Override
+    public void backToTop() {
+        smoothScrollToPosition(0);
     }
 
     private void startLoad() {
