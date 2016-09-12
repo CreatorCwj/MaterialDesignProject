@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.utils.Utils;
+import com.widget.DoubleProgressView;
 import com.widget.RoundProgressBar;
 
 import java.util.ArrayList;
@@ -45,6 +48,9 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
     @InjectView(R.id.roundBar)
     private RoundProgressBar roundBar;
 
+    @InjectView(R.id.mpv)
+    private DoubleProgressView mpv;
+
     private boolean flag = true;
 
     @Override
@@ -59,7 +65,26 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
         testGlobalLayout();
         testAnim();
         setRoundBar();
+
+        mpv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mpv.setData(36, 64);
+            }
+        }, 2000);
 //        startActivity();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean b = super.dispatchTouchEvent(ev);
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean b = super.onTouchEvent(event);
+        return b;
     }
 
     @Override
@@ -154,6 +179,8 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        mpv.setData(0, 64);
+
 //        progressTop.setVisibility(View.INVISIBLE);
         List<Animator> animators = new ArrayList<>();
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 1000);

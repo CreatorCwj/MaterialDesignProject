@@ -31,7 +31,7 @@
     <!--Toolbar style-->
     <style name="toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/color500</item>
-        <item name="titleTextColor">@color/color50</item>
+        <!--<item name="titleTextColor">@color/color50</item>-->
     </style>
 
 </resources>

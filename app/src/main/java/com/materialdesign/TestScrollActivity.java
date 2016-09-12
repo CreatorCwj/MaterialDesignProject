@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -77,5 +78,17 @@ public class TestScrollActivity extends RoboActivity implements IRefreshLoadView
     @Override
     public void onRefresh() {
         Utils.showToast(getApplicationContext(), "refresh");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("lifeCycle:","onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("lifeCycle:","onStop");
     }
 }

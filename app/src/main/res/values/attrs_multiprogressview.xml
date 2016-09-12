@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DoubleProgressView">
+        <attr name="color1" format="color" />
+        <attr name="color2" format="color" />
+        <attr name="emptyColor" format="color" />
+        <attr name="gapColor" format="color" />
+        <attr name="colonColor" format="color" />
+
+        <attr name="gapAngle" format="float" />
+        <attr name="roundWidth" format="dimension" />
+        <attr name="percentTextSize" format="dimension"/>
+
+        <attr name="percentTextOrientation" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
+
+        <attr name="animationStyle" format="enum">
+            <enum name="none" value="0" />
+            <enum name="clockWise" value="1" />
+            <enum name="counterClockWise" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>
