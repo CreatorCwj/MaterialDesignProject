@@ -33,7 +33,11 @@ public class Main5Activity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listview.setAdapter(adapter);
+                if (listview.getVisibility() == View.VISIBLE) {
+                    listview.setVisibility(View.GONE);
+                } else {
+                    listview.setVisibility(View.VISIBLE);
+                }
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {

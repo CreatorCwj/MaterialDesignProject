@@ -1,6 +1,7 @@
 package com.materialdesign;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -200,6 +201,12 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
         //第二个参数是属性名,必须确保被更新对象有setter和getter方法(进行动画实时处理)
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(progressTop, "translationX", 0, 1000);
         animators.add(objectAnimator);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+        });
 
         ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(progressTop, "rotation", 0, 360);
         animators.add(objectAnimator2);
