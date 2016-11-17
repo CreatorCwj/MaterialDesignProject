@@ -104,21 +104,21 @@ public class MainActivity extends RoboActivity {
             }
         });
         snackbar.setActionTextColor(getResources().getColor(R.color.color50));
-        snackbar.setCallback(new Snackbar.Callback() {
-            @Override
-            public void onDismissed(Snackbar snackbar, int event) {
-                super.onDismissed(snackbar, event);
-                testSnackBar.setText("snackBar取消");
-            }
-
-            @Override
-            public void onShown(Snackbar snackbar) {
-                super.onShown(snackbar);
-                testSnackBar.setText("snackBar显示");
-            }
-        });
-        if (!snackbar.isShown())
-            snackbar.show();
+//        snackbar.setCallback(new Snackbar.Callback() {
+//            @Override
+//            public void onDismissed(Snackbar snackbar, int event) {
+//                super.onDismissed(snackbar, event);
+//                testSnackBar.setText("snackBar取消");
+//            }
+//
+//            @Override
+//            public void onShown(Snackbar snackbar) {
+//                super.onShown(snackbar);
+//                testSnackBar.setText("snackBar显示");
+//            }
+//        });
+//        if (!snackbar.isShown())
+//            snackbar.show();
     }
 
     private void testTextInputLayout() {

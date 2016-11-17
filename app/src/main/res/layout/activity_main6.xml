@@ -6,30 +6,63 @@
     tools:context="com.materialdesign.Main6Activity">
 
     <com.widget.MyLinearLayout
-        android:id="@+id/myLl"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@android:color/white"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
         android:orientation="vertical">
 
-        <!--<EditText-->
-            <!--android:id="@+id/editText"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="50dp" />-->
+        <com.widget.MultiTouchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
 
-        <!--<EditText-->
-            <!--android:id="@+id/editText2"-->
+        <!--<com.widget.ScaleGestureView-->
             <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:layout_below="@+id/editText" />-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@android:color/white" />-->
 
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:background="@android:color/black" />
+        <!--<com.widget.MyButton-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="btn1" />-->
+
+        <!--<com.widget.MyButton2-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="btn2" />-->
 
     </com.widget.MyLinearLayout>
+
+    <!--<com.widget.MyLinearLayout-->
+    <!--android:id="@+id/myLl"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:layout_marginTop="100dp"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/editText"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/editText2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:layout_below="@+id/editText" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv1"-->
+    <!--android:layout_width="150dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:background="@android:color/black" />-->
+
+    <!--</com.widget.MyLinearLayout>-->
 
     <!--<Button-->
     <!--android:id="@+id/btn2"-->

@@ -28,14 +28,14 @@ public class Main6Activity extends AppCompatActivity {
 //        testClipView = (TestClipView) findViewById(R.id.testClipView);
 //        ((View) testClipView.getParent()).scrollTo(0, 100);
 //        editText = (EditText) findViewById(R.id.editText);
-        textView = (TextView) findViewById(R.id.tv1);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                findViewById(R.id.myLl).setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1300));
-//                findViewById(R.id.myLl).invalidate();
-            }
-        });
+//        textView = (TextView) findViewById(R.id.tv1);
+//        textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                findViewById(R.id.myLl).setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1300));
+////                findViewById(R.id.myLl).invalidate();
+//            }
+//        });
 //        textView.invalidate();
 //        TextView textView = new TextView(this);
 //        textView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -53,6 +53,11 @@ public class Main6Activity extends AppCompatActivity {
                 Utils.showToast(getApplicationContext(), text);
             }
         });
+
+//        Environment.getExternalStorageDirectory();//外部存储区根目录文件夹
+//        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);//存储某一种类型文件的公共文件夹,比如图库
+//        Environment.getDataDirectory();//data数据包的根目录(应用的用户数据)
+//        Environment.getRootDirectory();//系统根目录,只读
     }
 
     @Override
@@ -73,9 +78,6 @@ public class Main6Activity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_POINTER_DOWN:
-        }
-        return super.onTouchEvent(event);
+        return true;
     }
 }

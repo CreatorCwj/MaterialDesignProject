@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.widget.pinned.PinnedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:anchor="@+id/btn1"
+        app:header="@layout/sv_pinned_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="btn1" />
+
+            <include
+                android:id="@+id/btn1"
+                layout="@layout/sv_pinned_view" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="btn2" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="btn3" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="btn4" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="btn5" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="btn6" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="btn7" />
+
+        </LinearLayout>
+    </com.widget.pinned.PinnedScrollView>
+</RelativeLayout>

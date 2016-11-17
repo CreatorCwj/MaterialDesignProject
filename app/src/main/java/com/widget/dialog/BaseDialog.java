@@ -7,9 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatDialogFragment;
+//import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ import java.util.List;
  * Created by cwj on 16/10/11.
  * 统一对话框基类
  */
-public abstract class BaseDialog<DialogType extends BaseDialog, BuilderType extends BaseDialog.Builder> extends AppCompatDialogFragment {
+public abstract class BaseDialog<DialogType extends BaseDialog, BuilderType extends BaseDialog.Builder> extends DialogFragment {
 
     //view
     private TextView titleTextView;

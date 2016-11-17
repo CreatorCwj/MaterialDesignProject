@@ -54,7 +54,7 @@ public class HeaderFooterRecyclerView extends RecyclerView {
     }
 
     private void initClickListener() {
-        addOnItemTouchListener(new ItemClickListener());
+//        addOnItemTouchListener(new ItemClickListener());
     }
 
     @Override
@@ -129,58 +129,58 @@ public class HeaderFooterRecyclerView extends RecyclerView {
         return adapter == null ? 0 : adapter.getItemCount();
     }
 
-    private class ItemClickListener extends RecyclerView.SimpleOnItemTouchListener {
-
-        private final GestureDetectorCompat gestureDetector;
-
-        public ItemClickListener() {
-            gestureDetector = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    View view = findChildViewUnder(e.getX(), e.getY());
-                    if (view != null && onItemClickListener != null) {
-                        int pos = getValidPosition(getChildLayoutPosition(view));
-                        if (pos >= 0) {
-                            onItemClickListener.onItemClick(view, pos);
-                        }
-                        return true;
-                    }
-                    return false;
-                }
-
-                @Override
-                public void onLongPress(MotionEvent e) {
-                    View view = findChildViewUnder(e.getX(), e.getY());
-                    if (view != null && onItemLongClickListener != null) {
-                        int pos = getValidPosition(getChildLayoutPosition(view));
-                        if (pos >= 0) {
-                            onItemLongClickListener.onItemLongClick(view, pos);
-                        }
-                    }
-                }
-
-                private int getValidPosition(int pos) {
-                    if (pos < 0) {
-                        return -1;
-                    }
-                    Adapter adapter = getAdapter();
-                    if (adapter instanceof HeaderFooterWrapperAdapter) {
-                        HeaderFooterWrapperAdapter wrapperAdapter = (HeaderFooterWrapperAdapter) adapter;
-                        if (wrapperAdapter.isHeaderView(pos) || wrapperAdapter.isFooterView(pos)) {
-                            return -1;
-                        }
-                        return pos - getHeaderCounts();
-                    }
-                    return -1;
-                }
-            });
-        }
-
-        @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            gestureDetector.onTouchEvent(e);
-            return false;
-        }
-    }
+//    private class ItemClickListener extends RecyclerView.SimpleOnItemTouchListener {
+//
+//        private final GestureDetectorCompat gestureDetector;
+//
+//        public ItemClickListener() {
+//            gestureDetector = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener() {
+//                @Override
+//                public boolean onSingleTapUp(MotionEvent e) {
+//                    View view = findChildViewUnder(e.getX(), e.getY());
+//                    if (view != null && onItemClickListener != null) {
+//                        int pos = getValidPosition(getChildLayoutPosition(view));
+//                        if (pos >= 0) {
+//                            onItemClickListener.onItemClick(view, pos);
+//                        }
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//
+//                @Override
+//                public void onLongPress(MotionEvent e) {
+//                    View view = findChildViewUnder(e.getX(), e.getY());
+//                    if (view != null && onItemLongClickListener != null) {
+//                        int pos = getValidPosition(getChildLayoutPosition(view));
+//                        if (pos >= 0) {
+//                            onItemLongClickListener.onItemLongClick(view, pos);
+//                        }
+//                    }
+//                }
+//
+//                private int getValidPosition(int pos) {
+//                    if (pos < 0) {
+//                        return -1;
+//                    }
+//                    Adapter adapter = getAdapter();
+//                    if (adapter instanceof HeaderFooterWrapperAdapter) {
+//                        HeaderFooterWrapperAdapter wrapperAdapter = (HeaderFooterWrapperAdapter) adapter;
+//                        if (wrapperAdapter.isHeaderView(pos) || wrapperAdapter.isFooterView(pos)) {
+//                            return -1;
+//                        }
+//                        return pos - getHeaderCounts();
+//                    }
+//                    return -1;
+//                }
+//            });
+//        }
+//
+//        @Override
+//        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+//            gestureDetector.onTouchEvent(e);
+//            return false;
+//        }
+//    }
 
 }
