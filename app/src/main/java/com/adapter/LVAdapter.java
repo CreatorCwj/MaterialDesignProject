@@ -3,9 +3,11 @@ package com.adapter;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,25 +21,25 @@ public class LVAdapter extends BaseAdapter {
         this.list = list;
     }
 
-    public void addData(List<String> data){
+    public void addData(List<String> data) {
         this.list.addAll(data);
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
+//    @Override
+//    public int getViewTypeCount() {
+//        return 2;
+//    }
 
     @Override
     public boolean hasStableIds() {
         return super.hasStableIds();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return position==0?100:1000;
-    }
+//    @Override
+//    public int getItemViewType(int position) {
+//        return position==0?100:1000;
+//    }
 
     @Override
     public int getCount() {
@@ -60,7 +62,7 @@ public class LVAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = new TextView(parent.getContext());
-            convertView.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
+            convertView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
             convertView.setBackgroundColor(Color.GREEN);
             viewHolder.textView = (TextView) convertView;
             convertView.setTag(viewHolder);
@@ -68,7 +70,21 @@ public class LVAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textView.setText(getItem(position));
+        viewHolder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addData(getData());
+            }
+        });
         return convertView;
+    }
+
+    private List<String> getData() {
+        List<String> datas = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            datas.add("item" + i);
+        }
+        return datas;
     }
 
     private static class ViewHolder {

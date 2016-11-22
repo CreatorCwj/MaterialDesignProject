@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="anchor" format="reference"/>
-    <attr name="header" format="reference"/>
 
-    <declare-styleable name="PinnedScrollView">
-        <attr name="anchor"/>
-        <attr name="header"/>
+    <!--公用属性-->
+    <attr name="anchorPos" format="integer" />
+    <attr name="headerMode">
+        <enum name="custom" value="0" />
+        <enum name="item" value="1" />
+    </attr>
+
+    <declare-styleable name="BasePinnedLayout">
+        <attr name="headerView" format="reference" />
+        <attr name="canPinned" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="BaseListPinnedLayout">
+        <attr name="anchorPos" />
+        <attr name="headerMode" />
+    </declare-styleable>
+
+    <declare-styleable name="ScrollPinnedLayout">
+        <attr name="anchorId" format="reference" />
+    </declare-styleable>
+
+
+
+    <declare-styleable name="GroupListPinnedLayout">
+        <attr name="anchorPos" />
+        <attr name="headerMode" />
+    </declare-styleable>
+
+    <!--<declare-styleable name="PinnedScrollView">-->
+    <!--<attr name="anchorId" />-->
+    <!--<attr name="headerView" />-->
+    <!--<attr name="canPinned" />-->
+    <!--</declare-styleable>-->
+
+    <!--<declare-styleable name="PinnedListView">-->
+    <!--<attr name="anchorPos" />-->
+    <!--<attr name="headerView" />-->
+    <!--<attr name="canPinned" />-->
+    <!--<attr name="headerMode" />-->
+    <!--</declare-styleable>-->
 </resources>
