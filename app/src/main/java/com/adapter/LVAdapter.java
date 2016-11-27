@@ -17,11 +17,20 @@ public class LVAdapter extends BaseAdapter {
 
     private List<String> list;
 
+    private boolean secondType;
+
     public LVAdapter(List<String> list) {
         this.list = list;
     }
 
     public void addData(List<String> data) {
+        this.list.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    public void resetData(boolean secondType, List<String> data) {
+        this.secondType = secondType;
+        this.list.clear();
         this.list.addAll(data);
         notifyDataSetChanged();
     }
@@ -40,6 +49,12 @@ public class LVAdapter extends BaseAdapter {
 //    public int getItemViewType(int position) {
 //        return position==0?100:1000;
 //    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        return secondType ? 1 : 0;
+    }
 
     @Override
     public int getCount() {
@@ -63,19 +78,19 @@ public class LVAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             convertView = new TextView(parent.getContext());
             convertView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
-            convertView.setBackgroundColor(Color.GREEN);
             viewHolder.textView = (TextView) convertView;
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textView.setText(getItem(position));
-        viewHolder.textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addData(getData());
-            }
-        });
+        viewHolder.textView.setBackgroundColor(secondType ? Color.BLUE : Color.BLACK);
+//        viewHolder.textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                addData(getData());
+//            }
+//        });
         return convertView;
     }
 

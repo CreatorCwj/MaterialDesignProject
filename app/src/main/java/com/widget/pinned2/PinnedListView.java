@@ -2,6 +2,7 @@ package com.widget.pinned2;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.BaseAdapter;
@@ -23,6 +24,8 @@ public class PinnedListView extends ListView implements IPinnedList {
     private View headerView;
     private int currentHeaderViewType = INVALID_HEADER_VIEW_TYPE;//当前headerView的type(ITEM模式用到的，用于按类别复用headerView)
 
+    private OnPinnedScrollListener onPinnedScrollListener;
+
     public PinnedListView(Context context) {
         super(context);
     }
@@ -39,6 +42,9 @@ public class PinnedListView extends ListView implements IPinnedList {
         @Override
         public void onChanged() {
             buildHeaderViewByAdapter();//重新获取Header
+            if(onPinnedScrollListener!=null){
+                onPinnedScrollListener.onPinnedScroll();
+            }
         }
     };
 
@@ -54,6 +60,9 @@ public class PinnedListView extends ListView implements IPinnedList {
         }
         resetHeaderViewType();//换了adapter,要重置viewType(新的adapter可能有一样的viewType)
         buildHeaderViewByAdapter();//重新获取Header
+        if(onPinnedScrollListener!=null){
+            onPinnedScrollListener.onPinnedScroll();
+        }
     }
 
     @Override
@@ -68,7 +77,7 @@ public class PinnedListView extends ListView implements IPinnedList {
             if (anchorView != null) {
                 int anchorTop = anchorView.getTop();
                 int baseline = getPaddingTop();
-                return anchorTop <= baseline;
+                return anchorTop < baseline;
             }
             return false;
         } else { //anchor之后项都会显示header
@@ -114,5 +123,18 @@ public class PinnedListView extends ListView implements IPinnedList {
 
     private void resetHeaderViewType() {
         currentHeaderViewType = INVALID_HEADER_VIEW_TYPE;
+    }
+
+    @Override
+    public void setIPinnedScrollListener(@NonNull OnPinnedScrollListener onPinnedScrollListener) {
+        this.onPinnedScrollListener = onPinnedScrollListener;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (onPinnedScrollListener != null) {
+            onPinnedScrollListener.onPinnedScroll();
+        }
     }
 }

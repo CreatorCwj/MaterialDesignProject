@@ -27,7 +27,7 @@ public class GroupListPinnedLayout extends BaseListPinnedLayout<IPinnedGroupList
 
     @Override
     protected View getHeaderViewByList(@NonNull IPinnedGroupList pinnedView) {
-        return pinnedView.getHeaderViewByGroup(offset);
+        return pinnedView.getHeaderViewByGroup();
     }
 
     @Override
@@ -39,8 +39,10 @@ public class GroupListPinnedLayout extends BaseListPinnedLayout<IPinnedGroupList
     protected boolean shouldPinned(@NonNull IPinnedGroupList pinnedView) {
         if (headerMode == HEADER_MODE_CUSTOM) {
             return pinnedView.shouldPinned(anchorPos, false);
+        } else if (headerMode == HEADER_MODE_ITEM) {
+            return pinnedView.shouldPinnedByGroup();
         }
-        return headerMode == HEADER_MODE_ITEM;
+        return false;
     }
 
     @Override

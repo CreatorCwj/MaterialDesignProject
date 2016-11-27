@@ -2,10 +2,12 @@ package com.widget.pinned2;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
@@ -16,11 +18,17 @@ import android.widget.FrameLayout;
  */
 public class PinnedExpandableListView extends ExpandableListView implements IPinnedGroupList {
 
+    private static final int INVALID_GROUP_TYPE = -1;
     private static final int INVALID_GROUP_POSITION = -1;
 
     private View headerView;
 
     private int currentGroupPosition = INVALID_GROUP_POSITION;//当前headerView所处groupPosition
+    private int currentGroupType = INVALID_GROUP_TYPE;
+
+    private boolean isNotify;
+
+    private OnPinnedScrollListener onPinnedScrollListener;
 
     public PinnedExpandableListView(Context context) {
         this(context, null);
@@ -32,18 +40,24 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
 
     public PinnedExpandableListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
-        updateHeaderView();
+        getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                if (isNotify && onPinnedScrollListener != null) {//数据更新引起的,需要在layout结束后再次获取新的header
+                    updateHeaderView(true);
+                    onPinnedScrollListener.onPinnedScroll();
+                }
+                isNotify = false;
+            }
+        });
     }
 
     private DataSetObserver observer = new DataSetObserver() {
         @Override
         public void onChanged() {
-            updateHeaderView();
+            isNotify = true;//数据更新了
+            expand();
+//            buildHeaderViewByAdapter();
         }
     };
 
@@ -57,7 +71,16 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
         if (adapter != null) {
             adapter.registerDataSetObserver(observer);
         }
-        updateHeaderView();
+        expand();
+        observer.onChanged();
+    }
+
+    private void expand() {
+        //test
+        int groupCount = getExpandableListAdapter().getGroupCount();
+        for (int i = 0; i < groupCount; i++) {
+            expandGroup(i);
+        }
     }
 
     @Override
@@ -72,12 +95,22 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
             if (anchorView != null) {
                 int anchorTop = anchorView.getTop();
                 int baseline = getPaddingTop();
-                return anchorTop <= baseline;
+                return anchorTop < baseline;
             }
             return false;
         } else { //anchor之后项都会显示header
             return firstPosition > anchorPos;
         }
+    }
+
+    @Override
+    public boolean shouldPinnedByGroup() {
+        return !(getHeaderViewsCount() == 0 && currentGroupPosition == 0 && getFirstVisiblePosition() == 0 && firstGroupToTop());
+    }
+
+    private boolean firstGroupToTop() {
+        View firstGroupChild = getChildCount() > 0 ? getChildAt(0) : null;
+        return firstGroupChild != null && firstGroupChild.getTop() >= 0;
     }
 
     @Override
@@ -87,7 +120,8 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
     }
 
     @Override
-    public View getHeaderViewByGroup(int[] offset) {
+    public View getHeaderViewByGroup() {
+        updateHeaderView(false);
         return headerView;
     }
 
@@ -97,16 +131,16 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
     }
 
     //更新headerView
-    private void updateHeaderView() {
+    private void updateHeaderView(boolean forceBuildHeader) {
         //获取最新groupPosition
         int newGroupPosition = getNewGroupPosition();
         //正常处理
-        if (newGroupPosition != currentGroupPosition) {
+        if (((newGroupPosition != currentGroupPosition) && !isNotify) || forceBuildHeader) {//改变位置或者数据刷新都要重新获取header
             currentGroupPosition = newGroupPosition;
             //获取新的headerView
             buildHeaderViewByAdapter();
         }
-        //计算offset
+        //计算offset,设置margin
         int offset = getOffset();
         if (headerView != null) {
             ViewGroup.LayoutParams params = headerView.getLayoutParams();
@@ -119,31 +153,6 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
                 headerView.setLayoutParams(params);
             }
         }
-        //注:这里需要处理一种情况,在没有ExpandableListView没有header的情况下,第一个group置顶时,headerView会显示出来,要取消掉这种情况
-        if (headerView != null && getHeaderViewsCount() == 0 && newGroupPosition == 0 && getFirstVisiblePosition() == 0 && firstGroupToTop()) {
-            if (headerView.getParent() == null) {//还没有加入View树,需要设置监听,计算高度设置初始margin
-                headerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        headerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        setInitialMargin();
-                    }
-                });
-            } else {//直接设置margin
-                setInitialMargin();
-            }
-        }
-    }
-
-    private void setInitialMargin() {
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) headerView.getLayoutParams();
-        params.topMargin = -headerView.getMeasuredHeight();
-        headerView.setLayoutParams(params);
-    }
-
-    private boolean firstGroupToTop() {
-        View firstGroupChild = getChildCount() > 0 ? getChildAt(0) : null;
-        return firstGroupChild != null && firstGroupChild.getTop() >= 0;
     }
 
     //获取最新的groupPosition
@@ -163,16 +172,28 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
     //根据currentGroupPosition创建headerView
     private void buildHeaderViewByAdapter() {
         if (currentGroupPosition == INVALID_GROUP_POSITION) {//无headerView
+            resetHeaderViewType();
             headerView = null;
             return;
         }
         ExpandableListAdapter adapter = getExpandableListAdapter();
-        if (adapter == null || currentGroupPosition < 0 || currentGroupPosition >= adapter.getGroupCount()) {
+        if (!(adapter instanceof BaseExpandableListAdapter) || currentGroupPosition < 0 || currentGroupPosition >= adapter.getGroupCount()) {
+            resetHeaderViewType();
             headerView = null;
             return;
         }
-        //ExpandableListView没有viewType,所以GroupView都是一种,直接复用即可
-        headerView = adapter.getGroupView(currentGroupPosition, isGroupExpanded(currentGroupPosition), headerView, this);
+        //根据groupType复用
+        int newGroupType = ((BaseExpandableListAdapter) adapter).getGroupType(currentGroupPosition);
+        if (currentGroupType == INVALID_GROUP_TYPE || currentGroupType != newGroupType) {//new header
+            headerView = adapter.getGroupView(currentGroupPosition, isGroupExpanded(currentGroupPosition), null, this);
+            currentGroupType = newGroupType;
+        } else {//reuse
+            headerView = adapter.getGroupView(currentGroupPosition, isGroupExpanded(currentGroupPosition), headerView, this);
+        }
+    }
+
+    private void resetHeaderViewType() {
+        currentGroupType = INVALID_GROUP_TYPE;
     }
 
     //计算headerView的offset
@@ -185,10 +206,14 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
         for (int i = firstPosition + 1; i <= lastPosition; i++) {
             //找到header下面的第一个group
             if (ExpandableListView.getPackedPositionType(getExpandableListPosition(i)) == PACKED_POSITION_TYPE_GROUP) {
-                View nextGroupView = getChildAt(i - firstPosition);
+                int childIndex = i - firstPosition;
+                View nextGroupView = getChildCount() > childIndex ? getChildAt(i - firstPosition) : null;
                 //根据其top判断header的offset
                 if (nextGroupView != null) {
                     int top = nextGroupView.getTop();
+                    if (headerView.getMeasuredHeight() <= 0) {
+                        measureHeader();
+                    }
                     int headerBottom = headerView.getMeasuredHeight();
                     return top < headerBottom ? headerBottom - top : 0;
                 }
@@ -197,4 +222,32 @@ public class PinnedExpandableListView extends ExpandableListView implements IPin
         return 0;
     }
 
+    private void measureHeader() {
+        if (headerView == null) {
+            return;
+        }
+        ViewGroup.LayoutParams params = headerView.getLayoutParams();
+        int widthSpec = MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY);
+        int heightSpec;
+        if (params != null && params.height > 0) {
+            heightSpec = MeasureSpec.makeMeasureSpec(params.height, MeasureSpec.EXACTLY);
+        } else {
+            heightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        }
+        headerView.measure(widthSpec, heightSpec);
+        headerView.layout(0, 0, headerView.getMeasuredWidth(), headerView.getMeasuredHeight());
+    }
+
+    @Override
+    public void setIPinnedScrollListener(@NonNull OnPinnedScrollListener onPinnedScrollListener) {
+        this.onPinnedScrollListener = onPinnedScrollListener;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (onPinnedScrollListener != null) {
+            onPinnedScrollListener.onPinnedScroll();
+        }
+    }
 }

@@ -14,6 +14,8 @@ public class PinnedScrollView extends ScrollView implements IPinnedScroll {
 
     private int[] anchorLocation = new int[2];
 
+    private OnPinnedScrollListener onPinnedScrollListener;
+
     public PinnedScrollView(Context context) {
         super(context);
     }
@@ -33,6 +35,19 @@ public class PinnedScrollView extends ScrollView implements IPinnedScroll {
         int baseline = anchorLocation[1] + getPaddingTop();
         anchorView.getLocationInWindow(anchorLocation);
         int anchorTop = anchorLocation[1];
-        return anchorTop <= baseline;
+        return anchorTop < baseline;
+    }
+
+    @Override
+    public void setIPinnedScrollListener(@NonNull OnPinnedScrollListener onPinnedScrollListener) {
+        this.onPinnedScrollListener = onPinnedScrollListener;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (onPinnedScrollListener != null) {
+            onPinnedScrollListener.onPinnedScroll();
+        }
     }
 }

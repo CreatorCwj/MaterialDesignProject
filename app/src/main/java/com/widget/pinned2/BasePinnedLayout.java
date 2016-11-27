@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 
 import com.materialdesign.R;
@@ -27,6 +26,8 @@ public abstract class BasePinnedLayout<T extends BaseIPinned> extends FrameLayou
     private View headerView;
 
     protected T pinnedView;
+
+    private BaseIPinned.OnPinnedScrollListener onPinnedScrollListener;
 
     public BasePinnedLayout(Context context) {
         this(context, null);
@@ -52,21 +53,12 @@ public abstract class BasePinnedLayout<T extends BaseIPinned> extends FrameLayou
     }
 
     private void initListener() {
-        //滚动时刷新header状态
-        getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+        onPinnedScrollListener = new BaseIPinned.OnPinnedScrollListener() {
             @Override
-            public void onScrollChanged() {
+            public void onPinnedScroll() {
                 refreshOnScrollChanged();
             }
-        });
-        //首次加载完布局后需要刷新一下header状态
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                BasePinnedLayout.this.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                refreshHeaderState();
-            }
-        });
+        };
     }
 
     /**
@@ -188,7 +180,14 @@ public abstract class BasePinnedLayout<T extends BaseIPinned> extends FrameLayou
         super.onFinishInflate();
         //xml加载完后才可以获取到相应的view
         findPinnedView();
+        registerScrollListenerToPinned();
         inflateHeaderView();
+    }
+
+    private void registerScrollListenerToPinned() {
+        if (pinnedView != null) {
+            pinnedView.setIPinnedScrollListener(onPinnedScrollListener);
+        }
     }
 
     private void findPinnedView() {

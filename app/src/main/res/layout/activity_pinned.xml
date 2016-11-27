@@ -8,7 +8,7 @@
         android:id="@+id/glpl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:anchorPos="2"
+        app:anchorPos="1"
         app:canPinned="true"
         app:headerMode="item"
         app:headerView="@layout/sv_pinned_view">
