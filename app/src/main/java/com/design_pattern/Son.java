@@ -1,29 +1,23 @@
 package com.design_pattern;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Created by cwj on 16/11/21.
  */
-public class Son extends Father {
+public class Son {
 
-    protected void method(HashMap map) {
+    private static final Son son = new Son();
 
+    static {
+        System.out.println(son.toString());
     }
 
-    @Override
-    protected void method(Map map) {
-        super.method(map);
+    private Son() {
     }
 
-    private void m(){
-        method(new LinkedHashMap());
+    public static Son getInstance(){
+        return son;
     }
 
-    public static void main(String[] args) {
-        Son father = new Son();
-        father.method(new LinkedHashMap());
-    }
 }

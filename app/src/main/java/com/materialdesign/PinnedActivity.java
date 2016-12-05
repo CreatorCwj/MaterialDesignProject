@@ -1,5 +1,6 @@
 package com.materialdesign;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
@@ -43,18 +43,19 @@ public class PinnedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pinned);
         //pelv
-        pelv = (ExpandableListView) findViewById(R.id.pelv);
-        pelv.addHeaderView(getHeaderButton());
-        expAdapter = new ExpAdapter(getData(), getChildsData());
-        expAdapter.addData(getData(), getChildsData());
-        pelv.setAdapter(expAdapter);
-        pelv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Utils.showToast(parent.getContext(), "groupClick:" + groupPosition);
-                return true;
-            }
-        });
+//        pelv = (ExpandableListView) findViewById(R.id.pelv);
+//        pelv.addHeaderView(getHeaderButton());
+//        expAdapter = new ExpAdapter(getData(), getChildsData());
+//        expAdapter.addData(getData(), getChildsData());
+//        pelv.setAdapter(expAdapter);
+//        pelv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+//            @Override
+//            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+//                Utils.showToast(parent.getContext(), "groupClick:" + groupPosition);
+//                startActivity(new Intent(getApplicationContext(), DialogActivity.class));
+//                return true;
+//            }
+//        });
 //        pelv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 //            @Override
 //            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
