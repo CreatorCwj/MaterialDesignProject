@@ -7,7 +7,7 @@ public class Father {
 
     public static void main(String[] args) {
         Son son = Son.getInstance();
-        System.out.println("son");
+        System.out.println("son update tag v1.0.0");
     }
 
 }
