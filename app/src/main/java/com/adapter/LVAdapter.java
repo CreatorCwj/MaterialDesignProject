@@ -84,6 +84,7 @@ public class LVAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textView.setText(getItem(position));
+        viewHolder.textView.setTextColor(Color.WHITE);
         viewHolder.textView.setBackgroundColor(secondType ? Color.BLUE : Color.BLACK);
 //        viewHolder.textView.setOnClickListener(new View.OnClickListener() {
 //            @Override

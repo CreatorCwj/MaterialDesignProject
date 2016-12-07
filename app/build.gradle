@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'pmd'
 
 android {
     compileSdkVersion 23
@@ -17,6 +18,39 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+apply plugin: 'pmd'
+task pmd(type: Pmd) {
+
+    ruleSets = [
+            "${project.rootDir}/config/pmd/pmd-ruleset.xml"
+    ]
+
+    ignoreFailures = false
+
+    source fileTree('src/main/java/testpmd')
+
+    include '**/*.java'
+
+    exclude '**/gen/**'
+
+    reports {
+
+        xml {
+            enabled = false
+            destination "$project.buildDir/reports/pmd/pmd.xml"
+
+        }
+
+        html {
+            enabled = true
+            destination "$project.buildDir/reports/pmd/pmd.html"
+
+        }
+
+    }
+
 }
 
 dependencies {

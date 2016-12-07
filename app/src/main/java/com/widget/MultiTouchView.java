@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -53,6 +54,7 @@ public class MultiTouchView extends View {
         switch (action) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
+                log(event);
                 //将pointerId及其对应的初始化坐标保存到map中
                 index = event.getActionIndex();
                 pointerId = event.getPointerId(index);
@@ -63,6 +65,7 @@ public class MultiTouchView extends View {
                 hashMap.put(pointerId, coordModel);
                 break;
             case MotionEvent.ACTION_MOVE:
+                log(event);
                 //将每个触摸点坐标更新
 
                 //根据id遍历
@@ -101,6 +104,12 @@ public class MultiTouchView extends View {
         }
         invalidate();//刷新UI
         return true;
+    }
+
+    private void log(MotionEvent event) {
+        int index = event.getActionIndex();
+        int id = event.getPointerId(index);
+        Log.i("IndexId:", "rawX:" + event.getRawX() + " x:" + event.getX(index) + " index:" + index);
     }
 
     @Override
