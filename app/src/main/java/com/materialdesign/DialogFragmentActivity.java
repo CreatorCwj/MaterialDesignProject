@@ -73,7 +73,7 @@ public class DialogFragmentActivity extends AppCompatActivity implements View.On
                 .title("选择方式")
                 .items(new String[]{"item0", "item1"}, new int[]{R.drawable.linkedin, R.drawable.linkedin})
                 .addItem("item2",R.drawable.linkedin)
-//                .itemGravity(Gravity.CENTER)
+//                .itemGravity(Gravity.CENTER_VERTICAL)
                 .onItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

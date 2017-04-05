@@ -44,4 +44,8 @@ public class Utils {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, context.getResources().getDisplayMetrics());
 
     }
+
+    public static void logger(String tag, String prefix, String text) {
+        Log.i(tag, prefix + " - " + text);
+    }
 }

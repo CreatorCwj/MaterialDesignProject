@@ -6,19 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 
+import com.test_fragment.BaseActivity;
 import com.utils.Utils;
 import com.widget.dialog.BaseDialog;
 import com.widget.dialog.MessageDialog;
 
-public class DialogActivity extends AppCompatActivity {
+public class DialogActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(new FrameLayout(this));
         MessageDialog.Builder builder = new MessageDialog.Builder()
-                .cancelable(false)
-                .canceledOnTouchOutside(false)
+                .cancelable(true)
+                .canceledOnTouchOutside(true)
                 .title("公告")
                 .titleGravity(Gravity.CENTER)
                 .message("盘古CRM系统预计在10月9日22:00迁移数据，预计持续2个小时，届时盘古系统暂停访问。请各位一线同事做好准备！")

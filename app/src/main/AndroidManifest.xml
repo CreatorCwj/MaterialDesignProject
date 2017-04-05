@@ -306,17 +306,54 @@
         <activity
             android:name="com.test_fragment.TextFragmentActivity"
             android:launchMode="singleTask">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name="com.test_fragment.TestFragment2Activity"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.test_fragment.TestFragment3Activity"
+            android:launchMode="singleTask"
+            android:theme="@style/Hehe" />
+        <activity android:name=".FragmentStackActivity">
+
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <service android:name=".TestService" />
+
+        <activity
+            android:name=".ButterKnifeActivity"
+            android:label="@string/title_activity_butter_knife"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.test_fragment.TestFragment2Activity"
-            android:launchMode="singleTask"/>
-        <activity android:name="com.test_fragment.TestFragment3Activity"
-            android:launchMode="singleTask"
-            android:theme="@style/Hehe"/>
+        <activity
+            android:name=".FlowLayoutActivity"
+            android:label="@string/title_activity_butter_knife"
+            android:theme="@style/AppTheme">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
     </application>
 
 </manifest>
