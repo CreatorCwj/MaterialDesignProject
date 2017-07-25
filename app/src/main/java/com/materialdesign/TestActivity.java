@@ -213,9 +213,9 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
 
         AnimatorSet animatorSet = new AnimatorSet();//也可用各自的ofPropertyValueHolder方法来控制多个动画同步异步执行
         animatorSet.playTogether(animators);//同步执行动画
-//        animatorSet.playSequentially(animators);//顺序执行动画
-//        animatorSet.play(valueAnimator).with(objectAnimator);//同步执行两个动画
-//        animatorSet.play(objectAnimator2).after(valueAnimator).after(2000);//在某个动画后执行一个动画,after为play的动画执行前延迟时间,不能在AnimatorSet里设置duration,否则会覆盖(duration可在给动画的Animator对象设置)
+        animatorSet.playSequentially(animators);//顺序执行动画
+        animatorSet.play(valueAnimator).with(objectAnimator);//同步执行两个动画
+        animatorSet.play(objectAnimator2).after(valueAnimator).after(2000);//在某个动画后执行一个动画,after为play的动画执行前延迟时间,不能在AnimatorSet里设置duration,否则会覆盖(duration可在给动画的Animator对象设置)
         animatorSet.setDuration(1000);
         animatorSet.start();
 

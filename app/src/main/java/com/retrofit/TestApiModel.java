@@ -8,7 +8,7 @@ public class TestApiModel {
 
     public int key1;
     public int key2;
-    public int key3;
+    public String key3;
 
     @Override
     public String toString() {
