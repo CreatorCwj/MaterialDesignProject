@@ -12,6 +12,8 @@ public class Test {
         String res = strs[0];
         objs[0] = 1;
         res = strs[0];
+
+        //修改2
     }
 
 }
