@@ -263,10 +263,8 @@ public class RXJavaActivity extends BaseActivity {
 //                .fit()
 //                .noFade()
 //                .into(imageView);
-
+        
         //test revert1
-
-        //test revert2
     }
 
 }
