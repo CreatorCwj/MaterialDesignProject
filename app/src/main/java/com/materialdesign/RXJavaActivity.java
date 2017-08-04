@@ -236,6 +236,7 @@ public class RXJavaActivity extends BaseActivity {
                 .subscribe(new Subscriber<TestApiModel>() {
                     @Override
                     public void onCompleted() {
+                        //hihihi
                         Utils.showToast(getApplicationContext(), "success!!!");
                     }
 
