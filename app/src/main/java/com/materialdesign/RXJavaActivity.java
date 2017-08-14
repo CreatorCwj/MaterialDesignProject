@@ -247,6 +247,8 @@ public class RXJavaActivity extends BaseActivity {
                         tv1.setText("result:" + testApiModel.toString());
                     }
                 });
+
+        //test cherry-pick
     }
 
 //    private void test() {
