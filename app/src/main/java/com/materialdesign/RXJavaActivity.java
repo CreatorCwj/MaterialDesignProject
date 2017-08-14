@@ -18,16 +18,12 @@ import com.retrofit.TestApiModel;
 import com.retrofit.rxjava.RXJavaService;
 import com.retrofit.rxjava.SsoidModel;
 import com.retrofit.rxjava.TestCwjModel;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
 import com.test_fragment.BaseActivity;
 import com.utils.Utils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,9 +78,9 @@ public class RXJavaActivity extends BaseActivity {
 
     @OnClick(R.id.btn1)
     void onClick(View view) {
-        serial();
+//        serial();
 //        parallel();
-//        testDynamic();
+        testDynamic();
         tv1.setSelected(!tv1.isSelected());
     }
 
@@ -117,55 +113,56 @@ public class RXJavaActivity extends BaseActivity {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync())
                 .build();
 
-        retrofit.create(RXJavaService.class)
-                .testCwj("http://mock.sankuai.com/moma/cwjtest")
-                .enqueue(new Callback<Object>() {
-                    @Override
-                    public void onResponse(Call<Object> call, Response<Object> response) {
-                        Object res = response.body();
-                        String json = getGson().toJson(res);
-                    }
-
-                    @Override
-                    public void onFailure(Call<Object> call, Throwable t) {
-
-                    }
-                });
+//        retrofit.create(RXJavaService.class)
+//                .testCwj("http://mock.sankuai.com/moma/cwjtest")
+//                .enqueue(new Callback<Object>() {
+//                    @Override
+//                    public void onResponse(Call<Object> call, Response<Object> response) {
+//                        Object res = response.body();
+//                        String json = getGson().toJson(res);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Object> call, Throwable t) {
+//
+//                    }
+//                });
 
         retrofit.create(RXJavaService.class)
                 .testCwj2("http://mock.sankuai.com/moma/cwjtest")
                 .enqueue(new Callback<TestCwjModel>() {
                     @Override
                     public void onResponse(Call<TestCwjModel> call, Response<TestCwjModel> response) {
-                        TestCwjModel model = response.body();
-                        String json = new Gson().toJson(model);
+
                     }
 
                     @Override
                     public void onFailure(Call<TestCwjModel> call, Throwable t) {
-
-                    }
-                });
-
-        retrofit.create(RXJavaService.class)
-                .testCwj3("http://mock.sankuai.com/moma/cwjtest")
-                .enqueue(new Callback<Map<String, Double>>() {
-                    @Override
-                    public void onResponse(Call<Map<String, Double>> call, Response<Map<String, Double>> response) {
-                        Map<String, Double> model = response.body();
-                        String json = new Gson().toJson(model);
-                        StringBuilder sb = new StringBuilder("");
-                        for (Map.Entry<String, Double> entry : model.entrySet()) {
-                            sb.append(entry.getValue()).append("  ");
+                        if (t != null && t.getCause() != null) {
+                            Utils.showToast(getApplicationContext(), t.getMessage() + ":" + t.getCause().getMessage());
                         }
-                        Utils.showToast(getApplicationContext(), sb.toString());
-                    }
-
-                    @Override
-                    public void onFailure(Call<Map<String, Double>> call, Throwable t) {
-
                     }
                 });
+
+//        retrofit.create(RXJavaService.class)
+//                .testCwj3("http://mock.sankuai.com/moma/cwjtest")
+//                .enqueue(new Callback<Map<String, Double>>() {
+//                    @Override
+//                    public void onResponse(Call<Map<String, Double>> call, Response<Map<String, Double>> response) {
+//                        Map<String, Double> model = response.body();
+//                        String json = new Gson().toJson(model);
+//                        StringBuilder sb = new StringBuilder("");
+//                        for (Map.Entry<String, Double> entry : model.entrySet()) {
+//                            sb.append(entry.getValue()).append("  ");
+//                        }
+//                        Utils.showToast(getApplicationContext(), sb.toString());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Map<String, Double>> call, Throwable t) {
+//
+//                    }
+//                });
     }
 
     private Gson getGson() {
@@ -252,7 +249,7 @@ public class RXJavaActivity extends BaseActivity {
                 });
     }
 
-    private void test() {
+//    private void test() {
 //        Picasso.with(this)
 //                .load(PHOTO_URL)
 //                .placeholder(R.drawable.placeHolder)
@@ -263,9 +260,9 @@ public class RXJavaActivity extends BaseActivity {
 //                .fit()
 //                .noFade()
 //                .into(imageView);
-        
-        //test revert1
-        //test push2
-    }
+//
+//        //test revert1
+//        //test push2
+//    }
 
 }
