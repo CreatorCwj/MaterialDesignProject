@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'pmd'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.materialdesign"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -19,12 +20,60 @@ android {
     }
 }
 
+apply plugin: 'pmd'
+task pmd(type: Pmd) {
+
+    ruleSets = [
+            "${project.rootDir}/config/pmd/pmd-ruleset.xml"
+    ]
+
+    ignoreFailures = false
+
+    source fileTree('src/main/java/testpmd')
+
+    include '**/*.java'
+
+    exclude '**/gen/**'
+
+    reports {
+
+        xml {
+            enabled = false
+            destination "$project.buildDir/reports/pmd/pmd.xml"
+
+        }
+
+        html {
+            enabled = true
+            destination "$project.buildDir/reports/pmd/pmd.html"
+
+        }
+
+    }
+
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:cardview-v7:23.1.1'
+
+
+
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0@aar'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    compile 'io.reactivex:rxandroid:1.2.0'
 }

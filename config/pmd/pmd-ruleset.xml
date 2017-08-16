@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Custom Pmd Ruleset"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+    <description>
+        custom pmd ruleset
+    </description>
+
+    <!--controversial相关-->
+    <!--不要直接调用native代码,待商榷-->
+    <rule ref="rulesets/java/controversial.xml/AvoidUsingNativeCode" />
+    <!--不引入sun包内容-->
+    <rule ref="rulesets/java/controversial.xml/DontImportSun" />
+    <!--字符串值不要带有会被解析成八进制写法的值如"\128"-->
+    <rule ref="rulesets/java/controversial.xml/SuspiciousOctalEscape" />
+    <!--不要手动调用垃圾回收方法-->
+    <rule ref="rulesets/java/controversial.xml/DoNotCallGarbageCollectionExplicitly" />
+
+    <!--naming命名相关-->
+    <!--变量命名规范,默认为final为全大写,非fianl不能有_,待商榷-->
+    <rule ref="rulesets/java/naming.xml/VariableNamingConventions" />
+    <!--全大写变量应该为final,集合上面使用,待商榷-->
+    <rule ref="rulesets/java/naming.xml/SuspiciousConstantFieldName" />
+    <!--boolean类型的getter方法命名为isXxx形式,包括带参数的方法,待商榷-->
+    <rule ref="rulesets/java/naming.xml/BooleanGetMethodName">
+        <properties>
+            <property name="checkParameterizedMethods" value="true" />
+        </properties>
+    </rule>
+    <!--成员名禁止和类名一致-->
+    <rule ref="rulesets/java/naming.xml/AvoidFieldNameMatchingTypeName" />
+    <!--方法命名规范,小写字母开头-->
+    <rule ref="rulesets/java/naming.xml/MethodNamingConventions" />
+    <!--变量名不和方法名相同-->
+    <rule ref="rulesets/java/naming.xml/AvoidFieldNameMatchingMethodName" />
+    <!--包名大写-->
+    <rule ref="rulesets/java/naming.xml/PackageCase" />
+    <!--类名大写字母开头-->
+    <rule ref="rulesets/java/naming.xml/ClassNamingConventions" />
+    <!--不要用$符号命名变量-->
+    <rule ref="rulesets/java/naming.xml/AvoidDollarSigns" />
+    <!--方法名不与类名相同-->
+    <rule ref="rulesets/java/naming.xml/MethodWithSameNameAsEnclosingClass" />
+    <!--不要命名hashcode为方法名-->
+    <rule ref="rulesets/java/naming.xml/SuspiciousHashcodeMethodName" />
+    <!--无声明包路径-->
+    <rule ref="rulesets/java/naming.xml/NoPackage" />
+
+    <!--unnecessary不必要代码检查-->
+    <rule ref="rulesets/java/unnecessary.xml">
+        <!--多余的圆括号(有时需要,使代码更加清晰)-->
+        <exclude name="UselessParentheses" />
+    </rule>
+
+    <!--empty空代码块检查-->
+    <rule ref="rulesets/java/empty.xml">
+        <!--catch块不能为空(不必要,有时提升性能不必在catch块做处理)-->
+        <exclude name="EmptyCatchBlock" />
+    </rule>
+
+    <!--optimizations可优化的代码检查-->
+    <rule ref="rulesets/java/optimizations.xml">
+        <!--UseStringBufferForStringAppends凡是拼接字符串要用StringBuilder/Buffer,待商榷-->
+        <!--方法参数避免赋值声明为final(没必要强制要求)-->
+        <exclude name="MethodArgumentCouldBeFinal" />
+        <!--局部变量没有再赋值声明为final(没必要强制要求)-->
+        <exclude name="LocalVariableCouldBeFinal" />
+        <!--用Arrays.asList代替循环复制数组,拿到的不可进行增删操作,不可取-->
+        <exclude name="UseArraysAsList" />
+    </rule>
+
+    <!--coupling解耦相关检查-->
+    <!--方法返回值和变量类型都用里氏替换原则(面向接口),待商榷-->
+    <rule ref="rulesets/java/coupling.xml/LooseCoupling" />
+
+    <!--strictexception异常检查-->
+    <rule ref="rulesets/java/strictexception.xml">
+        <!--不能catch原始的exception类型(不必要,通常不需要知道具体类型的错时会用到)-->
+        <exclude name="AvoidCatchingGenericException" />
+        <!--不能在方法签名上抛出异常(不必要)-->
+        <exclude name="SignatureDeclareThrowsException" />
+    </rule>
+
+    <!--braces括号相关检查,为了代码可读性和避免出错,语句块都要加括号-->
+    <rule ref="rulesets/java/braces.xml" />
+
+    <!--typeresolution类型解析相关检查-->
+    <rule ref="rulesets/java/typeresolution.xml">
+        <!--LooseCoupling,用里氏替换,待商榷-->
+        <!--不能在方法签名上抛出异常(不必要)-->
+        <exclude name="SignatureDeclareThrowsException" />
+    </rule>
+
+    <!--design代码设计方面的检查-->
+    <rule ref="rulesets/java/design.xml">
+        <!--ReturnEmptyArrayRatherThanNull返回空数组而不是null,待商榷-->
+        <!--未注释的空方法-->
+        <exclude name="UncommentedEmptyMethod" />
+        <!--抽象类空方法写成抽象方法(不必要)-->
+        <exclude name="EmptyMethodInAbstractClassShouldBeAbstract" />
+        <!--不可变变量声明为final,不必要-->
+        <exclude name="ImmutableField" />
+        <!--if-else中if执行肯定语句else为否定(不必要)-->
+        <exclude name="ConfusingTernary" />
+        <!--避免对方法参数重新赋值，不必要-->
+        <exclude name="AvoidReassigningParameters" />
+        <exclude name="AccessorClassGeneration" />
+        <!--同步块不要在方法上，不必要-->
+        <exclude name="AvoidSynchronizedAtMethodLevel" />
+        <!--全是静态方法的类为工具类,做成私有构造器等操作,不必要-->
+        <exclude name="UseUtilityClass" />
+        <!--使用集合方法判空集合,不必要-->
+        <exclude name="UseCollectionIsEmpty" />
+        <!--过于复杂的类-->
+        <exclude name="GodClass" />
+        <!--过少分支用if-else而不是switch,没必要-->
+        <exclude name="TooFewBranchesForASwitchStatement" />
+        <!--switch要有default的case,有时不要也可以-->
+        <exclude name="SwitchStmtsShouldHaveDefault" />
+        <!--对象比较用equals,不是绝对的-->
+        <exclude name="CompareObjectsWithEquals" />
+        <!--无注释的空构造器-->
+        <exclude name="UncommentedEmptyConstructor" />
+        <!--使用...代替数组参数,没必要-->
+        <exclude name="UseVarargs" />
+        <!--小心非静态初始化块在构造方法前调用,没必要-->
+        <exclude name="NonStaticInitializer" />
+        <!--判等条件不要写成双重否定的,不必要-->
+        <exclude name="LogicInversion" />
+    </rule>
+    <!--if嵌套层次太深,待商榷value-->
+    <rule ref="rulesets/java/design.xml/AvoidDeeplyNestedIfStmts">
+        <properties>
+            <property name="problemDepth" value="4" />
+        </properties>
+    </rule>
+
+    <!--unusedcode多余代码检查-->
+    <rule ref="rulesets/java/unusedcode.xml">
+        <!--不必要的访问修饰符不要加(不必要)-->
+        <exclude name="UnusedModifier" />
+    </rule>
+
+    <!--logging-java日志相关检查-->
+    <!--避免System打印-->
+    <rule ref="rulesets/java/logging-java.xml/SystemPrintln" />
+    <!--避免使用printStackTrace,用log代替节省性能-->
+    <rule ref="rulesets/java/logging-java.xml/AvoidPrintStackTrace" />
+    <!--一个类有一个logger对象即可-->
+    <rule ref="rulesets/java/logging-java.xml/MoreThanOneLogger" />
+
+    <!--strings字符串相关检查-->
+    <rule ref="rulesets/java/strings.xml">
+        <!--链式调用append方法,有时不需要-->
+        <exclude name="ConsecutiveAppendsShouldReuse" />
+        <!--循环判断char代替trim.length来比较是否是空串，没必要-->
+        <exclude name="InefficientEmptyStringCheck" />
+    </rule>
+
+    <!--basic基础检查-->
+    <rule ref="rulesets/java/basic.xml">
+        <!--AvoidThreadGroup避免使用ThreadGroup,其方法线程不安全,待商榷-->
+        <!--AvoidUsingOctalValues避免使用八进制,运算结果可能不是预期的,待商榷-->
+        <!--DontUseFloatTypeForLoopIndices循环遍历不要用float,精度可能不准,待商榷-->
+        <!--避免写死的IP地址,有时调试需要-->
+        <exclude name="AvoidUsingHardCodedIP" />
+    </rule>
+
+    <!--clone检查-->
+    <rule ref="rulesets/java/clone.xml" />
+
+    <!--imports导包检查-->
+    <rule ref="rulesets/java/imports.xml" />
+
+    <!--migrating变量赋值的检查,JUnit相关不需要-->
+    <rule ref="rulesets/java/migrating.xml">
+        <exclude name="JUnit4TestShouldUseBeforeAnnotation" />
+        <exclude name="JUnit4TestShouldUseAfterAnnotation" />
+        <exclude name="JUnit4TestShouldUseTestAnnotation" />
+        <exclude name="JUnit4SuitesShouldUseSuiteAnnotation" />
+        <exclude name="JUnitUseExpected" />
+    </rule>
+
+    <!--android相关-->
+    <rule ref="rulesets/java/android.xml" />
+
+    <!--codesize代码大小,不太好界定,不需要-->
+    <!--<rule ref="rulesets/java/codesize.xml" />-->
+
+    <!--comment注释相关不需要-->
+    <!--<rule ref="rulesets/java/comment.xml"/>-->
+
+    <!--javabeansBean类相关检查,不需要-->
+    <!--<rule ref="rulesets/java/javabeans.xml" />-->
+
+    <!--j2ee检查,不需要-->
+    <!--<rule ref="rulesets/java/j2ee.xml"/>-->
+
+    <!--sunsecure为不可变类做考虑,不需要-->
+    <!--<rule ref="rulesets/java/sunsecure.xml"/>-->
+
+    <!--junit测试单元相关,不考虑-->
+    <!--<rule ref="rulesets/java/junit.xml"/>-->
+
+    <!--finalizers finalize相关,不需要-->
+    <!--<rule ref="rulesets/java/finalizers.xml"/>-->
+
+    <!--logging-jakarta-commons不需要-->
+    <!--<rule ref="rulesets/java/logging-jakarta-commons.xml"/>-->
+</ruleset>

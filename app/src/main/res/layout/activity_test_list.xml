@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="refresh" />
+
+    <Button
+        android:id="@+id/load_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="load" />
+
+    <Button
+        android:id="@+id/clear_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="clear" />
+
+    <Button
+        android:id="@+id/test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/error_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="error" />
+
+    <!--<com.widget.RefreshLoadListView-->
+    <!--android:id="@+id/listview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:autoRefresh="true"-->
+    <!--app:canLoadMore="true"-->
+    <!--app:canRefresh="true"-->
+    <!--app:canScrollWhenRefresh="true"-->
+    <!--app:headerMode="classic" />-->
+
+    <com.refreshloadview.RefreshLoadListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_bright"
+        app:autoRefresh="true"
+        app:canLoadMore="true"
+        app:emptyView="@layout/empty_view"
+        app:firstPageNo="0"
+        app:footerBackgroundColor="@android:color/transparent"
+        app:footerLoadingText="loading..."
+        app:footerNoMoreText="no more"
+        app:footerResetText="reset"
+        app:footerTextColor="@android:color/black"
+        app:loadViewBackgroundColor="@android:color/holo_green_dark"
+        app:loadViewDividerColor="@android:color/white"
+        app:loadViewDividerHeight="2dp"
+        app:pageSize="15" />
+
+</LinearLayout>

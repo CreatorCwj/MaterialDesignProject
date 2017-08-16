@@ -1,6 +1,7 @@
 package com.materialdesign;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -8,6 +9,8 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -15,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.utils.Utils;
+import com.widget.DoubleProgressView;
 import com.widget.RoundProgressBar;
 
 import java.util.ArrayList;
@@ -45,6 +49,9 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
     @InjectView(R.id.roundBar)
     private RoundProgressBar roundBar;
 
+    @InjectView(R.id.mpv)
+    private DoubleProgressView mpv;
+
     private boolean flag = true;
 
     @Override
@@ -59,7 +66,26 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
         testGlobalLayout();
         testAnim();
         setRoundBar();
+
+        mpv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mpv.setData(36, 64);
+            }
+        }, 2000);
 //        startActivity();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean b = super.dispatchTouchEvent(ev);
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean b = super.onTouchEvent(event);
+        return b;
     }
 
     @Override
@@ -154,6 +180,8 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        mpv.setData(0, 64);
+
 //        progressTop.setVisibility(View.INVISIBLE);
         List<Animator> animators = new ArrayList<>();
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 1000);
@@ -173,15 +201,21 @@ public class TestActivity extends RoboActivity implements View.OnClickListener {
         //第二个参数是属性名,必须确保被更新对象有setter和getter方法(进行动画实时处理)
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(progressTop, "translationX", 0, 1000);
         animators.add(objectAnimator);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+        });
 
         ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(progressTop, "rotation", 0, 360);
         animators.add(objectAnimator2);
 
         AnimatorSet animatorSet = new AnimatorSet();//也可用各自的ofPropertyValueHolder方法来控制多个动画同步异步执行
         animatorSet.playTogether(animators);//同步执行动画
-//        animatorSet.playSequentially(animators);//顺序执行动画
-//        animatorSet.play(valueAnimator).with(objectAnimator);//同步执行两个动画
-//        animatorSet.play(objectAnimator2).after(valueAnimator).after(2000);//在某个动画后执行一个动画,after为play的动画执行前延迟时间,不能在AnimatorSet里设置duration,否则会覆盖(duration可在给动画的Animator对象设置)
+        animatorSet.playSequentially(animators);//顺序执行动画
+        animatorSet.play(valueAnimator).with(objectAnimator);//同步执行两个动画
+        animatorSet.play(objectAnimator2).after(valueAnimator).after(2000);//在某个动画后执行一个动画,after为play的动画执行前延迟时间,不能在AnimatorSet里设置duration,否则会覆盖(duration可在给动画的Animator对象设置)
         animatorSet.setDuration(1000);
         animatorSet.start();
 

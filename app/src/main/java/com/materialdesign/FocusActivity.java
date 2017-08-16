@@ -26,7 +26,9 @@ public class FocusActivity extends RoboActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FocusActivity.this, MainActivity.class));
+                setResult(RESULT_OK);
+                finish();
+//                startActivity(new Intent(FocusActivity.this, MainActivity.class));
             }
         });
     }

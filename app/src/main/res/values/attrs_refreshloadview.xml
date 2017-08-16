@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RefreshLoadView">
+        <attr name="canRefresh" format="boolean" />
+        <attr name="autoRefresh" format="boolean" />
+        <attr name="canLoadMore" format="boolean" />
+        <attr name="firstPageNo" format="integer" />
+        <attr name="pageSize" format="integer" />
+        <attr name="footerBackgroundColor" format="color" />
+        <attr name="footerTextColor" format="color" />
+        <attr name="footerResetText" format="string" />
+        <attr name="footerLoadingText" format="string" />
+        <attr name="footerNoMoreText" format="string" />
+        <attr name="loadViewDividerHeight" format="dimension" />
+        <attr name="loadViewDividerColor" format="color" />
+        <attr name="loadViewBackgroundColor" format="color" />
+        <attr name="emptyView" format="reference" />
+        <attr name="contentView" format="reference" />
+    </declare-styleable>
+</resources>

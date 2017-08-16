@@ -10,4 +10,13 @@
     <color name="color700">#1976D2</color>
     <color name="color800">#1565C0</color>
     <color name="color900">#0D47A1</color>
+
+    <color name="dialog_back">#E8E8E8</color>
+    <color name="light_gray">#777777</color>
+    <color name="light_black">#222222</color>
+    <color name="divider">#E8E8E8</color>
+    <color name="color_88A6BF">#88A6BF</color>
+    <color name="color_E8F0FE">#E8F0FE</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_E7E7E7">#E7E7E7</color>
 </resources>

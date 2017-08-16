@@ -58,7 +58,7 @@ public class NavigationViewActivity extends RoboActivity {
                 return true;
             }
         });
-        navigation_view.setCheckedItem(R.id.item1);//init first tab
+//        navigation_view.setCheckedItem(R.id.item1);//init first tab
     }
 
     private void setDrawer() {

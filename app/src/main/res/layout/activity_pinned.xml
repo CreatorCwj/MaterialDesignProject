@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.widget.pinned2.GroupListPinnedLayout
+        android:id="@+id/glpl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:anchorPos="1"
+        app:canPinned="true"
+        app:headerMode="item"
+        app:headerView="@layout/sv_pinned_view">
+
+        <com.widget.pinned2.PinnedExpandableListView
+            android:id="@+id/pelv"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:childDivider="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.widget.pinned2.GroupListPinnedLayout>
+
+    <!--<com.widget.pinned2.ListPinnedLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:anchorPos="0"-->
+        <!--app:canPinned="true"-->
+        <!--app:headerMode="item"-->
+        <!--app:headerView="@layout/sv_pinned_view">-->
+
+        <!--<com.widget.pinned2.PinnedListView-->
+            <!--android:id="@+id/lv"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:divider="@android:color/white"-->
+            <!--android:dividerHeight="2dp" />-->
+    <!--</com.widget.pinned2.ListPinnedLayout>-->
+
+    <!--<com.widget.pinned2.ScrollPinnedLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:anchorId="@+id/anchor1"-->
+        <!--app:canPinned="true"-->
+        <!--app:headerView="@layout/sv_pinned_view">-->
+
+        <!--<com.widget.pinned2.PinnedScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:text="btn1" />-->
+
+                <!--<include-->
+                    <!--android:id="@+id/anchor1"-->
+                    <!--layout="@layout/sv_pinned_view" />-->
+
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:text="btn2" />-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/anchor2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:text="btn3" />-->
+
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:text="btn4" />-->
+
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:text="btn5" />-->
+
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:text="btn6" />-->
+
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:text="btn7" />-->
+
+            <!--</LinearLayout>-->
+        <!--</com.widget.pinned2.PinnedScrollView>-->
+    <!--</com.widget.pinned2.ScrollPinnedLayout>-->
+
+</RelativeLayout>

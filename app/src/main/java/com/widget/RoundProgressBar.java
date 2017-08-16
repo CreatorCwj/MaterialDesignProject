@@ -15,12 +15,11 @@ import android.view.View;
 import com.utils.Utils;
 
 /**
+ * Created by cwj on 16/6/28.
  * 显示两种百分比的圆形进度条
  */
 public class RoundProgressBar extends View {
-    /**
-     * 画笔对象的引用
-     */
+
     private Paint paint;
 
     /**
@@ -154,6 +153,11 @@ public class RoundProgressBar extends View {
         //第二个比例
         paint.setColor(color2);
         canvas.drawText("3.44", startX, baseline, paint);
+
+        paint.setStrokeWidth(2);
+        canvas.drawLine(0, getMeasuredHeight() * 3 / 8, getMeasuredWidth(), getMeasuredHeight() * 3 / 8, paint);
+        canvas.drawLine(0, getMeasuredHeight() * 4 / 8, getMeasuredWidth(), getMeasuredHeight() * 4 / 8, paint);
+        canvas.drawLine(0, getMeasuredHeight() * 5 / 8, getMeasuredWidth(), getMeasuredHeight() * 5 / 8, paint);
 
         //多边形测试
 //        testMultiShape(canvas);

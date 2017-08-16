@@ -13,4 +13,15 @@
     <string name="title_activity_transition">TransitionActivityA</string>
     <string name="title_activity_transition_activity_b">TransitionActivityB</string>
     <string name="title_activity_focus">FocusActivity</string>
+    <string name="title_activity_test_list">TestListActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- 刷新加载控件默认显示文本-->
+    <string name="footer_reset_text">加载更多</string>
+    <string name="footer_no_more_text">无更多数据</string>
+    <string name="footer_loading_text">正在加载...</string>
+    <string name="title_activity_test_scroll">TestScrollActivity</string>
+    <string name="title_activity_main3">Main3Activity</string>
+    <string name="title_activity_butter_knife">ButterKnifeActivity</string>
+    <string name="butter_knife_text">ButterKnife</string>
 </resources>
